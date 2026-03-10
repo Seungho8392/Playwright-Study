@@ -2,7 +2,8 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-
+  reporter: [['html', { open: 'always' }]],
+  
   use: {
     // 1. 뷰포트 및 브라우저 기본 설정
     viewport: { width: 2560, height: 1440 },
@@ -20,6 +21,7 @@ export default defineConfig({
         '--start-maximized',       // 창 최대화 실행
         '--disable-notifications'  // 알림 차단
       ]
+      
     }
   },
 });
