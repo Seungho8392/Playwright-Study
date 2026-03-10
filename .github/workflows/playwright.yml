@@ -25,3 +25,11 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Slack Notification on Failure
+        if: failure() # 테스트가 실패했을 때만 실행
+        uses: rtCamp/action-slack-notify@v2
+       env:
+    SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+    SLACK_COLOR: '#ff0000'
+    SLACK_MESSAGE: '❌ 카카오 이모티콘 테스트 실패! 로그를 확인하세요.'
+    SLACK_TITLE: 'Playwright Test Failed'
