@@ -26,4 +26,19 @@ export class EmoticonHot {
     await expect(this.hotBannerTextImage()).toBeVisible(); // 성공 기준: "배너 텍스트 이미지"가 화면에 보여야 한다
     await expect(this.page.locator('a[href^="/t/"]').first()).toBeVisible(); // 보조 기준: 인기 리스트의 첫 상품 링크가 화면에 보여야 한다
   } // 검증 메서드 끝
+
+
+  async gotoTop1ProductAndCacheTitle() { // 인기 1위 상품으로 진입하고 타이틀을 캐시해서 반환한다
+    const top1Item = this.page.locator('li:has(span.txt_num.num_highlight:text("1"))').first(); // 번호 1이 들어있는 랭킹 li 요소를 찾는다
+    const titleLink = top1Item.locator('a[href^="/t/"]').first(); // 해당 랭킹 li 안에서 첫 번째 상품 타이틀 링크를 찾는다
+    const rawTitleText = (await top1Item.locator("strong").first().innerText()).trim(); // 리스트에서 보이는 타이틀 영역(뱃지 포함 가능)을 가져온다
+    const titleText = rawTitleText.split(/\r?\n/).map((t) => t.trim()).filter((t) => t && t !== "NEW")[0] ?? rawTitleText; // NEW 같은 뱃지를 제거하고 "상품명"만 정규화해서 캐시한다
+    await titleLink.click(); // 캐시한 타이틀을 가진 1위 상품을 클릭해서 상세페이지로 진입한다
+    await this.page.waitForURL(/\/t\//); // URL 패턴이 /t/ 인 상세페이지로 바뀔 때까지 기다린다
+    return titleText; // 바깥 테스트/메서드에서 사용할 수 있도록 타이틀을 반환한다
+  } // 1위 상품 진입 + 타이틀 캐시 메서드 끝
+
+  async expectTop1DetailMatches(titleFromList: string) { // 리스트에서 본 1위 타이틀과 상세페이지 타이틀이 같은지 검증한다
+    await expect(this.page.getByRole("heading", { level: 3, name: titleFromList })).toBeVisible(); // 성공 기준: 상세페이지의 상품 타이틀(heading)이 리스트의 상품명과 일치해야 한다
+  } // 상세페이지 타이틀 일치 검증 메서드 끝
 } // 클래스 끝
