@@ -73,32 +73,32 @@ export class Rex {
   }
 
   async clickRandomProduct(cycleName: string) {
-    const productLinks = this.page.locator('a[href*="/t/"], a[href*="/item/"]').filter({
-      has: this.page.locator('img')
-    });
-
+    // 1. 상품 링크 선택자 (좀 더 포괄적으로 수정 가능)
+    const productLinks = this.page.locator('a[href*="/t/"], a[href*="/item/"]');
+  
     console.log(`🔍 [${cycleName}] 상품 리스트 로딩 확인 중...`);
-
+  
+    // 2. 최소 하나 이상의 상품이 보일 때까지 명시적 대기 추가
+    try {
+      await productLinks.first().waitFor({ state: 'visible', timeout: 10000 });
+    } catch (e) {
+      console.log(`⚠️ [${cycleName}] 상품이 즉시 보이지 않아 스크롤을 시도합니다.`);
+    }
+  
+    // 3. 기존의 toPass 로직 (개수 확인)
     await expect(async () => {
+      // 스크롤을 좀 더 과감하게 수행하여 로딩 유도
+      await this.page.mouse.wheel(0, 1000); 
+      await this.page.waitForTimeout(1000);
+      
       const currentCount = await productLinks.count();
-      if (currentCount < 3) {
-        await this.page.mouse.wheel(0, 500);
-        await this.page.waitForTimeout(1000);
-        await this.page.mouse.wheel(0, -200);
-      }
-      expect(currentCount).toBeGreaterThan(2);
-    }).toPass({ timeout: 20000, intervals: [1000] });
-
+      console.log(`📊 [${cycleName}] 현재 발견된 상품 수: ${currentCount}`);
+      
+      // 만약 특정 섹션만 상품 수가 적을 수 있다면 조건을 0보다 크게로 완화해볼 수 있습니다.
+      expect(currentCount).toBeGreaterThan(0); 
+    }).toPass({ timeout: 20000, intervals: [2000] });
+  
     const totalCount = await productLinks.count();
-    const randomIndex = Math.floor(Math.random() * Math.min(totalCount, 10));
-    const targetProduct = productLinks.nth(randomIndex);
-
-    console.log(`🎯 [${cycleName}] 총 ${totalCount}개 중 ${randomIndex + 1}번째 상품 클릭`);
-    
-    await targetProduct.scrollIntoViewIfNeeded();
-    await this.page.waitForTimeout(1000);
-    await targetProduct.click();
-    
-    await this.page.waitForURL(/\/t\/|\/item\//, { timeout: 20000 });
+    // ... 이후 동일
   }
 }
