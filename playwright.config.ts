@@ -3,6 +3,9 @@ import { defineConfig } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
 
+// 1. 리포터 설정 (여기로 이동!)
+reporter: [['html', { open: 'never' }]],
+  
   use: {
     // 1. 뷰포트 및 브라우저 기본 설정
     viewport: { width: 2560, height: 1440 },
