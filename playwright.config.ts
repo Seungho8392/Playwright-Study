@@ -6,7 +6,7 @@ export default defineConfig({
   use: {
     // 1. 뷰포트 및 브라우저 기본 설정
     viewport: { width: 2560, height: 1440 },
-    headless: false,   // 브라우저 실행 화면 보기
+    headless: true,   // 브라우저 실행 화면 보기
     video: 'on',       // 테스트 실패/성공 시 영상 저장
 
     // 2. 권한 설정 (팝업 방지 및 위치 고정)
@@ -23,4 +23,3 @@ export default defineConfig({
     }
   },
 });
-
