@@ -74,10 +74,11 @@ for (let i = 0; i < 10; i++) {
    // 2. 섹션이 보일 때까지 스크롤
    await popularSection.scrollIntoViewIfNeeded();
 
-//    await page.getByRole('link', { name: '인기 이모티콘' }).click();
-//    await page.getByRole('link', { name: 'kakao emoticon shop' }).click();
+   // 인기 이모티콘 진입
+   await page.getByRole('link', { name: '인기 이모티콘' }).click();
+   await page.getByRole('link', { name: 'kakao emoticon shop' }).click();
 
-//    await popularSection.scrollIntoViewIfNeeded();
+   await popularSection.scrollIntoViewIfNeeded();
 
 //    await popularSection.locator('.link_item').first().waitFor({ state: 'visible' });
 
