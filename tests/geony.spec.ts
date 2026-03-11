@@ -15,7 +15,7 @@ test('카카오 이모티콘 샵 통합 테스트 실행', async ({ page }) => {
   const rex = new Rex(page);
 
   // 1. 초기 페이지 진입
-  await page.goto('https://e.kakao.com/item/', { waitUntil: 'networkidle' });
+  await page.goto('https://e.kakao.com/', { waitUntil: 'networkidle' });
 
   // 테스트 실행 시간을 2분으로 설정
   test.setTimeout(120000);
