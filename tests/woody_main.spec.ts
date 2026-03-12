@@ -56,8 +56,7 @@ test.describe('카카오 이모티콘 페이지 통합 테스트', () => {
         await woody.runNewFlow(); 
     });
 
-    test('렉스 시나리오_1', async ({ page }) => {
-        await page.goto('https://e.kakao.com/item/style', { waitUntil: 'networkidle' });
+    test('렉스 시나리오_1', async ({ }) => {
         await rex.runEmoticonTest(); 
     });
 
