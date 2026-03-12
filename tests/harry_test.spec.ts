@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('카카오 이모티콘 샵 유지보수 강화 시나리오', async ({ page }) => {
+test('카카오 이모티콘 샵 홈 화면', async ({ page }) => {
    
    test.setTimeout(120000); // 테스트 제한 시간을 2분(120초)으로 넉넉하게 늘립니다!
    
