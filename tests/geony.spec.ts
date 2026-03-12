@@ -8,9 +8,6 @@ test('카카오 이모티콘 샵 통합 테스트 실행', async ({ page }) => {
     await page.goto('https://e.kakao.com/', { waitUntil: 'networkidle' });
     test.setTimeout(120000);
 
-    // 2. POM 메서드를 통해 스타일 페이지로 이동
-    await rex.goToStylePage();
-
-    // 3. Rex 클래스에게 모든 실행 권한을 위임
+    // 2. 실행 권한 위임 (이 내부에서 스타일 페이지 이동까지 자동으로 수행함)
     await rex.runEmoticonTest();
 });
