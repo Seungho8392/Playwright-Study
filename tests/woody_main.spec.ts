@@ -2,6 +2,7 @@ import { test } from '@playwright/test';
 import { KakaoEmoticonPage_New } from '../POM/woody_pom';
 import { Rex } from '../POM/rex_pom';
 import { EmoticonHot } from '../POM/shannon_hot';
+import { Harry } from '../POM/harry_pom';
 
 // // 1번 방식
 // // [test.describe]란? (역할: 여러 개의 테스트(test)를 하나로 묶어주는 '커다란 보관함' 혹은 '그룹')
@@ -42,12 +43,14 @@ test.describe('카카오 이모티콘 페이지 통합 테스트', () => {
     let woody: KakaoEmoticonPage_New;
     let rex: Rex;
     let shannon: EmoticonHot;
+    let harry: Harry;
 
     test.beforeEach(async ({ page, context }) => {
         // [2. 내용물 채우기] 시작 전마다 3명 모두 세팅 + 홈 이동
         woody = new KakaoEmoticonPage_New(page);
         rex = new Rex(page);
         shannon = new EmoticonHot(page);
+        harry = new Harry(page);
         await page.goto('https://e.kakao.com/', { waitUntil: 'networkidle' });
     });
 
@@ -62,5 +65,9 @@ test.describe('카카오 이모티콘 페이지 통합 테스트', () => {
 
     test('섀넌 시나리오_1', async ({ }) => {
         await shannon.runHotTopsFlow(); 
+    });
+
+    test('해리 시나리오_1', async ({ }) => {
+        await harry.runNewFlow();
     });
 });

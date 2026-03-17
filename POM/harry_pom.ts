@@ -7,6 +7,15 @@ export class Harry {
         this.page = page;
     }
 
+    // 하나로 묶어서 실행하기
+    async runNewFlow() {
+        await this.gotoHome();
+        await this.checkBanners();
+        await this.verfiyNewEmoticons();
+        await this.checkPopularEmoticons();
+        await this.printStyleTags();
+    }
+
     async gotoHome(){
         await this.page.goto("https://e.kakao.com");
     }
