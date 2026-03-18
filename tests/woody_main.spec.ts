@@ -4,35 +4,34 @@ import { Rex } from '../POM/rex_pom';
 import { EmoticonHot } from '../POM/shannon_hot';
 import { Harry } from '../POM/harry_pom';
 
+// 1번 방식
+// [test.describe]란? (역할: 여러 개의 테스트(test)를 하나로 묶어주는 '커다란 보관함' 혹은 '그룹')
+test.describe('카카오 이모티콘 페이지 통합 테스트', () => {
+    // 시간을 무한대로 가져감 (기본 30초)
+    test.setTimeout(0);
+    // beforeEach라는 이름 자체가 각 함수 별 테스트(Each test)가 시작되기 전(Before)에 자동으로 실행해라
+    test.beforeEach(async ({ page }) => {
+        await page.goto('https://e.kakao.com/');
+    });
 
-// // 1번 방식
-// // [test.describe]란? (역할: 여러 개의 테스트(test)를 하나로 묶어주는 '커다란 보관함' 혹은 '그룹')
-// test.describe('카카오 이모티콘 페이지 통합 테스트', () => {
-//     // 시간을 무한대로 가져감 (기본 30초)
-//     test.setTimeout(0);
-//     // beforeEach라는 이름 자체가 각 함수 별 테스트(Each test)가 시작되기 전(Before)에 자동으로 실행해라
-//     test.beforeEach(async ({ page }) => {
-//         await page.goto('https://e.kakao.com/');
-//     });
+    test('우디 시나리오', async ({ page }) => {
+        // test 함수 안에서 const로 바로 만듭니다. (let 필요 없음)
+        const woody = new KakaoEmoticonPage_New(page);
+        await woody.runNewFlow();
+    });
 
-//     test('우디 시나리오', async ({ page }) => {
-//         // test 함수 안에서 const로 바로 만듭니다. (let 필요 없음)
-//         const woody = new KakaoEmoticonPage_New(page);
-//         await woody.runNewFlow();
-//     });
+    test('렉스 시나리오', async ({ page }) => {
+        // test 함수 안에서 const로 바로 만듭니다. (let 필요 없음)
+        const rex = new Rex(page);
+        await rex.runEmoticonTest();
+    });
 
-//     test('렉스 시나리오', async ({ page }) => {
-//         // test 함수 안에서 const로 바로 만듭니다. (let 필요 없음)
-//         const rex = new Rex(page);
-//         await rex.runEmoticonTest();
-//     });
-
-//     test('섀넌 시나리오', async ({ page }) => {
-//         // test 함수 안에서 const로 바로 만듭니다. (let 필요 없음)
-//         const shannon = new EmoticonHot(page);
-//         await shannon.runHotTopsFlow();
-//     });
-// });
+    test('섀넌 시나리오', async ({ page }) => {
+        // test 함수 안에서 const로 바로 만듭니다. (let 필요 없음)
+        const shannon = new EmoticonHot(page);
+        await shannon.runHotTopsFlow();
+    });
+});
 
 
 // 2번 방식

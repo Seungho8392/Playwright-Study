@@ -8,7 +8,7 @@ export class EmoticonHot {
     // 테스트에서 생성 시 page를 주입받는다
     this.page = page; // 주입받은 page를 클래스 멤버로 저장한다
   } // 생성자 끝
-
+  
   hotBannerTextImage() {
     // 상단 배너(텍스트가 이미지로 제공됨) 로케이터를 반환한다
     return this.page.getByRole("img", { name: "배너 텍스트 이미지" }); // 접근성 이름(alt)으로 배너 이미지를 찾는다
