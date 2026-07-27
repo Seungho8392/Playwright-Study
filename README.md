@@ -7,6 +7,19 @@ Git 협업 및 Page Object Model(POM) 구조를 학습하는 것을 목표로 �
 
 또한 테스트 결과를 Allure Report로 시각화하고, Slack Bot과 연동하여 테스트 결과를 알림으로 전달하는 환경을 구성했습니다.
 
+----
+## Team Members
+
+| 이름 | 담당 탭 | Page Object | Test Script |
+|------|---------|-------------|-------------|
+| 장용준 | 홈 | `POM/harry_home.ts` | `tests/harry_home.spec.ts` |
+| 이승호 | 신규 | `POM/woody_new.ts` | `tests/woody_new.spec.ts` |
+| 정윤하 | 인기 | `POM/shannon_hot.ts` | `tests/shannon_hot.spec.ts` |
+| 김건녕 | 스타일 | `POM/rex_style.ts` | `tests/rex_style.spec.ts` |
+
+각 팀원이 e.kakao.com의 주요 탭을 하나씩 맡아 테스트 시나리오를 설계하고 자동화 테스트를 구현했습니다.
+
+
 ---
 ### Project Goal
 
@@ -52,17 +65,6 @@ e.kakao.com 서비스는 로그인 시 모바일 기반 2차 인증이 필요합
 - UI 요소 확인
 
 - 기본적인 사용자 탐색 흐름 검증
-
-----
-### Team Members
-|Name|담당 탭|
-|---|---|
-|장용준|	홈|
-|이승호|	신규|
-|정윤하|	인기|
-|김건녕|	스타일|
-
-각 팀원이 e.kakao.com의 주요 탭을 하나씩 맡아 테스트 시나리오를 설계하고 자동화 테스트를 구현했습니다.
 
 ----
 ### Tech Stack
